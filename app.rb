@@ -9,14 +9,14 @@ class App
     setup
 
     name = ARGV[0] || 'nyan cat'
-    url = get_gif(name)
-    ext = 'gif'
+    url = get_icon(name)
+    ext = 'png'
 
     digested_name = Digest::SHA1.hexdigest(name)
     save_file(url, "#{digested_name}-original.#{ext}")
     resize("#{digested_name}-original.gif", "#{digested_name}-small.#{ext}")
-    edge_detect("#{digested_name}-small.gif", "#{digested_name}-edge.#{ext}")
-    colorize("#{digested_name}-edge.gif", "#{digested_name}-blue.#{ext}")
+    #edge_detect("#{digested_name}-small.gif", "#{digested_name}-edge.#{ext}")
+    colorize("#{digested_name}-small.gif", "#{digested_name}-blue.#{ext}")
     output_to_matrix("#{digested_name}-blue.#{ext}")
 
   end
