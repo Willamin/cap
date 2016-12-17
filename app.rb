@@ -56,7 +56,7 @@ class App
   def output_to_matrix(filename)
     puts "output(#{filename})" if @debug
     # this needs to be generalized or the led-image-viewer should be bundled
-    system("sudo /home/pi/rpi-rgb-led-matrix/utils/led-image-viewer --led-no-hardware-pulse --led-gpio-mapping=adafruit-hat -f -t=120 #{filename}")
+    system("sudo /home/pi/rpi-rgb-led-matrix/utils/led-image-viewer --led-no-hardware-pulse --led-gpio-mapping=adafruit-hat -f -t 120 #{filename}")
   end
 end
 
