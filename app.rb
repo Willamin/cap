@@ -15,11 +15,11 @@ class App
     digested_name = Digest::SHA1.hexdigest(name)
     save_file(url, "#{digested_name}-original.#{ext}")
     resize("#{digested_name}-original.#{ext}", "#{digested_name}-small.#{ext}")
-    #edge_detect("#{digested_name}-small.#{ext}", "#{digested_name}-edge.#{ext}")
+    edge_detect("#{digested_name}-small.#{ext}", "#{digested_name}-edge.#{ext}")
     #flatten("#{digested_name}-small.#{ext}", "#{digested_name}-flat.#{ext}", 'white')
     #invert("#{digested_name}-flat.#{ext}", "#{digested_name}-inv.#{ext}")
-    #colorize("#{digested_name}-edge.#{ext}", "#{digested_name}-blue.#{ext}")
-    output_to_matrix("#{digested_name}-small.#{ext}")
+    colorize("#{digested_name}-edge.#{ext}", "#{digested_name}-blue.#{ext}")
+    output_to_matrix("#{digested_name}-blue.#{ext}")
 
   end
 
