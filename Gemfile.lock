@@ -19,6 +19,9 @@ GEM
     launchy (2.4.3)
       addressable (~> 2.3)
     multipart-post (2.0.0)
+    noun-project-api (1.0.0)
+      oauth (~> 0)
+    oauth (0.5.1)
     oj (2.18.0)
     public_suffix (2.0.4)
 
@@ -27,6 +30,7 @@ PLATFORMS
 
 DEPENDENCIES
   giphy
+  noun-project-api (~> 1.0.0)
 
 BUNDLED WITH
    1.13.6
