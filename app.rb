@@ -14,6 +14,7 @@ class App
     resize("#{digested_name}-original.gif", "#{digested_name}-small.gif")
     edge_detect("#{digested_name}-small.gif", "#{digested_name}-edge.gif")
     colorize("#{digested_name}-edge.gif", "#{digested_name}-blue.gif")
+    output_to_matrix("#{digested_name}-blue.gif")
 
   end
 
@@ -44,6 +45,11 @@ class App
 
   def colorize(filename_original, filename_new)
     system("convert #{filename_original} -colorspace gray +level-colors ,blue  #{filename_new}")
+  end
+
+  def output_to_matrix(filename)
+    # this needs to be generalized or the led-image-viewer should be bundled
+    system("sudo /home/pi/rpi-rgb-led-matrix/utils/led-image-viewer --led-no-hardware-pulse --led-gpio-mapping=adafruit-hat -f -t=120 #{filename}")
   end
 end
 
