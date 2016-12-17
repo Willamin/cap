@@ -4,7 +4,6 @@ require 'open-uri'
 require 'digest/sha1'
 
 class App
-  @debug = true
   def run
     setup
 
@@ -24,6 +23,8 @@ class App
       config.version = 'v1'
       config.api_key = 'dc6zaTOxFJmzC'
     end
+
+    @debug = true
   end
 
   def get_gif(name)
@@ -38,22 +39,22 @@ class App
   end
 
   def resize(filename_original, filename_new)
-    puts "resize(#{name})" if @debug
+    puts "resize(#{filename_original})" if @debug
     system("convert #{filename_original} -resize 32x32 #{filename_new}")
   end
 
   def edge_detect(filename_original, filename_new)
-    puts "edge_detect(#{name})" if @debug
+    puts "edge_detect(#{filename_original})" if @debug
     system("convert #{filename_original} -colorspace Gray -edge 1 #{filename_new}")
   end
 
   def colorize(filename_original, filename_new)
-    puts "colorize(#{name})" if @debug
+    puts "colorize(#{filename_original})" if @debug
     system("convert #{filename_original} -colorspace gray +level-colors ,blue  #{filename_new}")
   end
 
   def output_to_matrix(filename)
-    puts "output(#{name})" if @debug
+    puts "output(#{filename})" if @debug
     # this needs to be generalized or the led-image-viewer should be bundled
     system("sudo /home/pi/rpi-rgb-led-matrix/utils/led-image-viewer --led-no-hardware-pulse --led-gpio-mapping=adafruit-hat -f -t=120 #{filename}")
   end
