@@ -14,9 +14,9 @@ class App
 
     digested_name = Digest::SHA1.hexdigest(name)
     save_file(url, "#{digested_name}-original.#{ext}")
-    resize("#{digested_name}-original.gif", "#{digested_name}-small.#{ext}")
+    resize("#{digested_name}-original.#{ext}", "#{digested_name}-small.#{ext}")
     #edge_detect("#{digested_name}-small.gif", "#{digested_name}-edge.#{ext}")
-    colorize("#{digested_name}-small.gif", "#{digested_name}-blue.#{ext}")
+    colorize("#{digested_name}-small.#{ext}", "#{digested_name}-blue.#{ext}")
     output_to_matrix("#{digested_name}-blue.#{ext}")
 
   end
