@@ -15,8 +15,10 @@ class App
     digested_name = Digest::SHA1.hexdigest(name)
     save_file(url, "#{digested_name}-original.#{ext}")
     resize("#{digested_name}-original.#{ext}", "#{digested_name}-small.#{ext}")
-    #edge_detect("#{digested_name}-small.gif", "#{digested_name}-edge.#{ext}")
-    colorize("#{digested_name}-small.#{ext}", "#{digested_name}-blue.#{ext}")
+    #edge_detect("#{digested_name}-small.#{ext}", "#{digested_name}-edge.#{ext}")
+    flatten("#{digested_name}-small.#{ext}", "#{digested_name}-flat.#{ext}", 'white')
+    invert("#{digested_name}-flat.#{ext}", "#{digested_name}-inv.#{ext}")
+    colorize("#{digested_name}-inv.#{ext}", "#{digested_name}-blue.#{ext}")
     output_to_matrix("#{digested_name}-blue.#{ext}")
 
   end
@@ -64,6 +66,16 @@ class App
   def colorize(filename_original, filename_new)
     puts "colorize(#{filename_original})" if @debug
     system("convert #{filename_original} -colorspace gray +level-colors ,blue  #{filename_new}")
+  end
+
+  def invert(filename_original, filename_new)
+    puts "invert(#{filename_original})" if @debug
+    system("convert -negate #{filename_original} #{filename_new}")
+  end
+
+  def flatten(filename_original, filename_new, color)
+    puts "flatten(#{filename_original})" if @debug
+    system("convert -background #{color} -flatten #{filename_original} #{filename_new}")
   end
 
   def output_to_matrix(filename)
