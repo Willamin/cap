@@ -9,13 +9,15 @@ class App
     setup
 
     name = ARGV[0] || 'nyan cat'
-    url = get_icon(name)
+    url = get_gif(name)
+    ext = 'gif'
+
     digested_name = Digest::SHA1.hexdigest(name)
-    save_file(url, "#{digested_name}-original.gif")
-    resize("#{digested_name}-original.gif", "#{digested_name}-small.gif")
-    edge_detect("#{digested_name}-small.gif", "#{digested_name}-edge.gif")
-    colorize("#{digested_name}-edge.gif", "#{digested_name}-blue.gif")
-    output_to_matrix("#{digested_name}-blue.gif")
+    save_file(url, "#{digested_name}-original.#{ext}")
+    resize("#{digested_name}-original.gif", "#{digested_name}-small.#{ext}")
+    edge_detect("#{digested_name}-small.gif", "#{digested_name}-edge.#{ext}")
+    colorize("#{digested_name}-edge.gif", "#{digested_name}-blue.#{ext}")
+    output_to_matrix("#{digested_name}-blue.#{ext}")
 
   end
 
@@ -56,7 +58,7 @@ class App
 
   def edge_detect(filename_original, filename_new)
     puts "edge_detect(#{filename_original})" if @debug
-    system("convert #{filename_original} -colorspace Gray -edge 1  #{filename_new}")
+    system("convert #{filename_original} -canny 0x1+10%+30%  #{filename_new}")
   end
 
   def colorize(filename_original, filename_new)
