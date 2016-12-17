@@ -7,7 +7,7 @@ class App
   def run
     setup
 
-    name = 'nyan cat'
+    name = ARGV[0] || 'nyan cat'
     url = get_gif(name)
     digested_name = Digest::SHA1.hexdigest(name)
     save_file(url, "#{digested_name}-original.gif")
